@@ -1,0 +1,79 @@
+spring:
+  profiles:
+    active: local # dev environment
+  main:
+    allow-bean-definition-overriding: true
+  redis:
+    port: 6379
+    host: localhost
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics, prometheus, health
+application:
+  version: /v1
+  prefix: /api
+  exclude-prefix-path: springdoc
+
+jwt:
+  secret: Q31NS56sal354sgyHJj1qwEkR3ycYUeR4uUAtX7WJraB7EN2O1DVM4yMyYuHxMEbSF5eXyYJkal1u4eqgB0F7Bq4A
+
+server:
+  port: 9090
+  servlet:
+    session:
+      timeout: 50m
+  http2:
+    enabled: true
+  shutdown: graceful
+
+# 추후 분리 필요 (리전별)
+
+---
+# local environment
+spring:
+  config:
+    activate:
+      on-profile: local
+  data:
+    mongodb:
+      host: xxx.xxx.xxx.xxx
+      port: 27017
+      database: livechatdb
+      username: xxxxxxx
+      password: 'xxxxx!%40#$'
+
+  sso:
+    auth-url: https://auth-url/v1/access_token/info
+    client-id: test
+    client-secret: $2a$10$kNKnyezbxubmwsrOGmBpf.lbfIH/J.RZwc0U3SbqFHTb18u.PHlB.
+
+logging:
+  level:
+    root: DEBUG
+---
+# dev environment
+spring:
+  config:
+    activate:
+      on-profile: dev
+  data:
+    mongodb:
+      host: xxx.xxx.xxx.xxx
+      port: 27017
+      database: livechatdb
+      username: xxxxxxx
+      password: 'xxxxx!%40#$'
+
+  sso:
+    auth-url: https://auth-url/v1/access_token/info
+    client-id: test
+    client-secret: $2a$10$kNKnyezbxubmwsrOGmBpf.lbfIH/J.RZwc0U3SbqFHTb18u.PHlB.
+
+logging:
+  config: classpath:logback-spring-dev.xml
+  level:
+    root: DEBUG
+
