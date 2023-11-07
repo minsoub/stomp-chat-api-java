@@ -1,6 +1,6 @@
-# fantoo-app-api
+# chat-app-api (stomp)
 
-Fantoo 2.0 APP API서버
+CHAT 2.0 APP API서버
 
 
 ## 스펙
